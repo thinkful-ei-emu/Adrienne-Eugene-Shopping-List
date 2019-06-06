@@ -28,6 +28,8 @@
 'use strict';
 
 function addItems(){
+  $('#js-shopping-list-form').submit(event => {
+  event.preventDefault();
   let listItem = $('#shopping-list-entry').val();
   let item = 
     `<li>
@@ -41,32 +43,28 @@ function addItems(){
         </button>
       </div>
     </li>`;
-  $('#js-shopping-list-form').submit(event => {
     $('.shopping-list').append(item);
-    event.preventDefault();
+    console.log(listItem);
   });
 }
 
 function checkItem() {
-  $('shopping-list').click('.shopping-item-toggle', event => {
-    $(event.currentTarget).closest('li').find('.shopping-item').toggleClass('.shopping-item__checked');
+  $('.shopping-list').on('click', '.shopping-item-toggle', event => {
+    $(event.currentTarget).closest('li').find('.shopping-item').toggleClass('shopping-item__checked');
   });
 }
 
-
-// $( "#target" ).submit(function( event ) {
-//   alert( "Handler for .submit() called." );
-//   event.preventDefault();
-// });
+// $( "#foo" ).toggleClass( className, addOrRemove );
 
 
-// function markItems(){
-  
-// }
+function deleteItem() {
+  $('.shopping-list').on('click', '.shopping-item-delete', event => {
+    $(event.currentTarget).closest('li').remove();
+  })
+}
 
-// function deleteItems(){
 
-// }
 
 $(addItems);
 $(checkItem);
+$(deleteItem);
