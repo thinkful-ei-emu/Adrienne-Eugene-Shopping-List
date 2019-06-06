@@ -28,9 +28,10 @@
 'use strict';
 
 function addItems(){
-  let item = `
-    <li>
-      <span class = 'shopping-item'>$(listItem)</span>
+  let listItem = $('#shopping-list-entry').val();
+  let item = 
+    `<li>
+      <span class = 'shopping-item'>${listItem}</span>
       <div class ='shopping-item-controls'>
         <button class ='shopping-item-toggle'>
           <span class = 'button-label' >check</span>
@@ -40,12 +41,17 @@ function addItems(){
         </button>
       </div>
     </li>`;
-  $('#js-').submit(event => {
+  $('#js-shopping-list-form').submit(event => {
     $('.shopping-list').append(item);
     event.preventDefault();
   });
 }
 
+function checkItem() {
+  $('shopping-list').click('.shopping-item-toggle', event => {
+    $(event.currentTarget).closest('li').find('.shopping-item').toggleClass('.shopping-item__checked');
+  });
+}
 
 
 // $( "#target" ).submit(function( event ) {
@@ -63,3 +69,4 @@ function addItems(){
 // }
 
 $(addItems);
+$(checkItem);
